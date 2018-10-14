@@ -1,8 +1,9 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>      // Include the Wi-Fi library
+#include "secrets.h"
 
-char *ssid = ""; // The SSID (name) of the Wi-Fi network you want to connect to
-char *password = "";     // The password of the Wi-Fi network
+char *ssid = SSID; // The SSID (name) of the Wi-Fi network you want to connect to
+char *password = PASS;     // The password of the Wi-Fi network
 
 void startWifi()
 {

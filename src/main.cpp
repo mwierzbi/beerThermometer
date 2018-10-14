@@ -3,6 +3,7 @@
 #include "ota.hpp"
 #include "wifi.hpp"
 #include "server.hpp"
+#include "webSocket.hpp"
 
 void setup()
 {
@@ -14,11 +15,21 @@ void setup()
   startMDNS();
   startSPIFFS();
   startServer();
+  startWebSocket();
   startOTA();
 }
 
+unsigned long last_10sec = 0;
 void loop(void)
 {
   serverHandleClient();
+  handleWebSocket();
   otaHandle();
+
+  unsigned long t = millis();
+  if ((t - last_10sec) > 10 * 1000)
+  {
+    sendToWebSocket("test");
+    last_10sec = millis();
+  }
 }

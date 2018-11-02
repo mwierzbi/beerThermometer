@@ -4,6 +4,7 @@
 #include "wifi.hpp"
 #include "server.hpp"
 #include "webSocket.hpp"
+#include "sensors.hpp"
 
 void setup()
 {
@@ -17,6 +18,8 @@ void setup()
   startServer();
   startWebSocket();
   startOTA();
+  startSensors();
+
 }
 
 unsigned long last_10sec = 0;
@@ -25,11 +28,12 @@ void loop(void)
   serverHandleClient();
   handleWebSocket();
   otaHandle();
+  handleSensors();
 
   unsigned long t = millis();
-  if ((t - last_10sec) > 10 * 1000)
+  if ((t - last_10sec) > 1 * 1000)
   {
-    sendToWebSocket("test");
     last_10sec = millis();
+    sendSensorsValues();
   }
 }

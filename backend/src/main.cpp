@@ -31,7 +31,7 @@ void loop(void)
   handleSensors();
 
   unsigned long t = millis();
-  if ((t - last_10sec) > 1 * 1000)
+  if ((t - last_10sec) > 5 * 1000)
   {
     last_10sec = millis();
     sendSensorsValues();
